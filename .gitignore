@@ -3,3 +3,6 @@ node_modules
 /.cache
 /build
 .env
+
+# Claude Code configuration with secrets
+.claude/symlinks/claude.json
