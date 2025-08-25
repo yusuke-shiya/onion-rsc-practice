@@ -1,4 +1,4 @@
-import { HabitRecord as PrismaHabitRecord } from '../../../generated/prisma';
+import { HabitRecord as PrismaHabitRecord } from '@prisma/client';
 import { HabitRecord } from '../../domain/entities/HabitRecord';
 import { HabitId, HabitRecordId, Duration } from '../../domain/valueObjects';
 

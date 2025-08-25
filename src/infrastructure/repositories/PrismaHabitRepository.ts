@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../../generated/prisma';
+import { PrismaClient } from '@prisma/client';
 import { HabitRepository } from '../../domain/repositories/HabitRepository';
 import { Habit } from '../../domain/entities/Habit';
 import { HabitId } from '../../domain/valueObjects/HabitId';

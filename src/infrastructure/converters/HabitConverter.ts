@@ -1,4 +1,4 @@
-import { Habit as PrismaHabit, TargetFrequency as PrismaTargetFrequency } from '../../../generated/prisma';
+import { Habit as PrismaHabit, TargetFrequency as PrismaTargetFrequency } from '@prisma/client';
 import { Habit } from '../../domain/entities/Habit';
 import { HabitId, HabitName, TargetFrequency, TargetFrequencyType } from '../../domain/valueObjects';
 

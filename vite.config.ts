@@ -21,4 +21,10 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  ssr: {
+    noExternal: ["@prisma/client"]
+  },
+  optimizeDeps: {
+    exclude: ["@prisma/client"]
+  }
 });
