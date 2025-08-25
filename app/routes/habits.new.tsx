@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { z } from "zod";
-import { DIContainer } from "~/src/infrastructure/di/DIContainer";
+import { DIContainer } from "~/src/utils/server-only";
 import { CreateHabitUseCase } from "~/src/application/useCases/CreateHabitUseCase";
 import { CreateHabitForm } from "~/src/presentation/components/CreateHabitForm";
 import { CreateHabitDTOSchema } from "~/src/application/dto";

@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { DIContainer } from "~/src/infrastructure/di/DIContainer";
+import { DIContainer } from "~/src/utils/server-only";
 import { GetHabitsUseCase } from "~/src/application/useCases/GetHabitsUseCase";
 import { HabitDetailView } from "~/src/presentation/components/HabitDetailView";
 import type { HabitWithRecordsDTO } from "~/src/application/dto";

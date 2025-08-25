@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { z } from "zod";
-import { DIContainer } from "~/src/infrastructure/di/DIContainer";
+import { DIContainer } from "~/src/utils/server-only";
 import { RecordExecutionUseCase } from "~/src/application/useCases/RecordExecutionUseCase";
 
 // フォーム入力のバリデーションスキーマ
