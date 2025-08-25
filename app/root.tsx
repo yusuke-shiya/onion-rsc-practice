@@ -4,8 +4,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+import { Navigation } from "~/src/presentation/components/Navigation";
 
 import "./tailwind.css";
 
@@ -24,14 +26,14 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-gray-50 dark:bg-gray-900">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -41,5 +43,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const location = useLocation();
+  
+  // ナビゲーションを表示しないページのパスを定義
+  const hideNavigation = false; // 現在はすべてのページでナビゲーションを表示
+  
+  return (
+    <>
+      {!hideNavigation && <Navigation />}
+      <Outlet />
+    </>
+  );
 }

@@ -9,3 +9,7 @@ node_modules
 
 # Serena working directory (cache, temporary files)
 .serena/
+
+# temporary files
+.tmp/
+/generated/prisma
