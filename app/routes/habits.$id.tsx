@@ -27,7 +27,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   try {
     // DIコンテナからUse Caseを取得
-    const container = DIContainer.getInstance();
+    const container = await DIContainer.getInstance();
     const getHabitsUseCase = new GetHabitsUseCase(
       container.habitRepository,
       container.habitRecordRepository,

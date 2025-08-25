@@ -69,7 +69,7 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     // DIコンテナからUse Caseを取得
-    const container = DIContainer.getInstance();
+    const container = await DIContainer.getInstance();
     const createHabitUseCase = new CreateHabitUseCase(
       container.habitRepository
     );

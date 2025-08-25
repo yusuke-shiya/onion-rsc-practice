@@ -15,7 +15,7 @@ export const meta: MetaFunction = () => {
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
     // DIコンテナからUse Caseを取得
-    const container = DIContainer.getInstance();
+    const container = await DIContainer.getInstance();
     const getHabitsUseCase = new GetHabitsUseCase(
       container.habitRepository,
       container.habitRecordRepository,

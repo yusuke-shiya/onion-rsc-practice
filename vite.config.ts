@@ -22,13 +22,13 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   ssr: {
-    noExternal: ["@prisma/client"],
-    external: ["@prisma/client/edge"]
+    external: ["@prisma/client"]
   },
   optimizeDeps: {
     exclude: ["@prisma/client"]
   },
   define: {
-    global: "globalThis"
+    global: "globalThis",
+    module: "undefined"
   }
 });

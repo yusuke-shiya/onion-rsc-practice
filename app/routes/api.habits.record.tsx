@@ -49,7 +49,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const validatedData = validationResult.data;
 
     // DIコンテナからUse Caseを取得
-    const container = DIContainer.getInstance();
+    const container = await DIContainer.getInstance();
     const recordExecutionUseCase = new RecordExecutionUseCase(
       container.habitRepository,
       container.habitRecordRepository

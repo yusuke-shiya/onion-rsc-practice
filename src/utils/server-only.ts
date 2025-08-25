@@ -10,4 +10,10 @@ if (typeof window !== 'undefined') {
   );
 }
 
-export * from '../infrastructure/di/DIContainer';
+import { DIContainer as _DIContainer } from '../infrastructure/di/DIContainer';
+
+export class DIContainer {
+  static async getInstance() {
+    return await _DIContainer.getInstance();
+  }
+}

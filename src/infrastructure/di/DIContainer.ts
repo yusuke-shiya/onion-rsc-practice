@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+// Prisma Clientは動的importで読み込む
 import { HabitRepository } from '../../domain/repositories/HabitRepository';
 import { HabitRecordRepository } from '../../domain/repositories/HabitRecordRepository';
 import { HabitProgressService } from '../../domain/services/HabitProgressService';
@@ -13,7 +13,7 @@ import { PrismaHabitRecordRepository } from '../repositories/PrismaHabitRecordRe
 export class DIContainer {
   private static instance: DIContainer | null = null;
   
-  private readonly _prismaClient: PrismaClient;
+  private _prismaClient: any;
   private readonly _habitRepository: HabitRepository;
   private readonly _habitRecordRepository: HabitRecordRepository;
   private readonly _habitProgressService: HabitProgressService;
@@ -22,7 +22,18 @@ export class DIContainer {
    * プライベートコンストラクタ（Singletonパターン）
    */
   private constructor() {
-    // PrismaClientの初期化
+    // 初期化は非同期で行う
+  }
+
+  /**
+   * 非同期初期化
+   */
+  private async initialize() {
+    if (this._prismaClient) return; // 既に初期化済み
+    
+    // Prisma Clientを動的import
+    const { PrismaClient } = await import('@prisma/client');
+    
     this._prismaClient = new PrismaClient({
       log: process.env.NODE_ENV === 'development' ? ['query', 'info', 'warn', 'error'] : ['error'],
     });
@@ -36,19 +47,20 @@ export class DIContainer {
   }
 
   /**
-   * シングルトンインスタンスの取得
+   * シングルトンインスタンスの取得（非同期）
    */
-  static getInstance(): DIContainer {
+  static async getInstance(): Promise<DIContainer> {
     if (DIContainer.instance === null) {
       DIContainer.instance = new DIContainer();
     }
+    await DIContainer.instance.initialize();
     return DIContainer.instance;
   }
 
   /**
    * PrismaClientの取得
    */
-  get prismaClient(): PrismaClient {
+  get prismaClient(): any {
     return this._prismaClient;
   }
 
