@@ -6,3 +6,6 @@ node_modules
 
 # Claude Code configuration with secrets
 .claude/symlinks/claude.json
+
+# Serena working directory (cache, temporary files)
+.serena/
