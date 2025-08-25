@@ -1,5 +1,5 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { DIContainer } from "~/src/utils/server-only";
 import { GetHabitsUseCase } from "~/src/application/useCases/GetHabitsUseCase";
 import { HabitList } from "~/src/presentation/components/HabitList";
@@ -40,8 +40,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 }
 
-export default function Index({ loaderData }: { loaderData: { habits: HabitWithExecutionStatusDTO[] } }) {
-  const { habits } = loaderData;
+export default function Index() {
+  const { habits } = useLoaderData<{ habits: HabitWithExecutionStatusDTO[] }>();
   const completedToday = habits.filter(h => h.executionStatus.isExecutedToday).length;
   const totalHabits = habits.length;
 

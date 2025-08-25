@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { DIContainer } from "~/src/utils/server-only";
 import { GetHabitsUseCase } from "~/src/application/useCases/GetHabitsUseCase";
 import { HabitDetailView } from "~/src/presentation/components/HabitDetailView";
@@ -111,8 +112,8 @@ async function getRecentRecords(container: any, habitId: string) {
   }
 }
 
-export default function HabitDetail({ loaderData }: { loaderData: { habit: HabitWithRecordsDTO } }) {
-  const { habit } = loaderData;
+export default function HabitDetail() {
+  const { habit } = useLoaderData<{ habit: HabitWithRecordsDTO }>();
   
   return <HabitDetailView habit={habit} />;
 }
