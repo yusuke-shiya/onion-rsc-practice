@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 習慣管理のためのデータモデル
+model Habit {
+  id              String             @id @default(uuid())
+  name            String             @db.VarChar(100)
+  targetFrequency TargetFrequency    @default(DAILY)
+  isActive        Boolean            @default(true)
+  userId          String             @db.VarChar(100) // ユーザー識別子（将来の拡張のため）
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  
+  // リレーション
+  habitRecords    HabitRecord[]
+  
+  @@map("habits")
+}
+
+model HabitRecord {
+  id          String    @id @default(uuid())
+  habitId     String
+  executedAt  DateTime  @default(now())
+  duration    Int?      @map("duration_minutes") // 実行時間（分単位、オプション）
+  note        String?   @db.Text                  // メモ（オプション）
+  createdAt   DateTime  @default(now())
+  
+  // リレーション
+  habit       Habit     @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  
+  @@unique([habitId, executedAt(sort: Desc)])
+  @@index([habitId, executedAt])
+  @@map("habit_records")
+}
+
+// 目標頻度の列挙型
+enum TargetFrequency {
+  DAILY   @map("daily")
+  WEEKLY  @map("weekly")
+  MONTHLY @map("monthly")
+}
